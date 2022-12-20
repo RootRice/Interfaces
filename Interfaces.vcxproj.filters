@@ -13,10 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Panel Elements">
+      <UniqueIdentifier>{cba4cd70-eee8-4900-a5f3-efa9b59ac663}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Panel Elements">
+      <UniqueIdentifier>{212f8151-1be6-467e-9140-905dd7e18d86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Interfaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel_Element.cpp">
+      <Filter>Source Files\Panel Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Image_Element.cpp">
+      <Filter>Source Files\Panel Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape_Element.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Panel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel_Element.h">
+      <Filter>Header Files\Panel Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Image_Element.h">
+      <Filter>Header Files\Panel Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape_Element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

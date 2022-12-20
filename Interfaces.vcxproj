@@ -142,7 +142,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="Image_Element.cpp" />
     <ClCompile Include="Interfaces.cpp" />
+    <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="Panel_Element.cpp" />
+    <ClCompile Include="Shape_Element.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="Image_Element.h" />
+    <ClInclude Include="Panel.h" />
+    <ClInclude Include="Panel_Element.h" />
+    <ClInclude Include="Shape_Element.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
