@@ -4,18 +4,20 @@
 class GUI
 {
 public:
-	GUI();
+	GUI(sf::RenderWindow& window) : window(window){};
 
-	void Add_Panel(sf::RenderWindow& window, sf::Vector2u size);
+	Panel& Add_Panel(Panel::Panel_Properties& properties);
 	void Remove_Panel(Panel& panel, unsigned int index_guide);
 	void Draw_Panels();
 private:
-	struct panel_info
+	sf::RenderWindow& window;
+
+	struct Panel_Info
 	{
 		Panel p;
 		unsigned int layer;
 	};
-	std::vector<panel_info> panels;
+	std::vector<Panel_Info> panels;
 
 	void Remove_Panel(unsigned int index);
 	void Update_Panel_Order(char update_amount);

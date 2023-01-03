@@ -1,10 +1,12 @@
 #include "GUI.h"
+void quickSort(int array[], int low, int high);
 
-void GUI::Add_Panel(sf::RenderWindow& window, sf::Vector2u size)
+Panel& GUI::Add_Panel(Panel::Panel_Properties& properties)
 {
 	Update_Panel_Order(+1);
 
-	panels.push_back(panel_info{ Panel(window, size, panels.size() - 1), 0 });
+	panels.push_back(Panel_Info{ Panel(properties, panels.size()), 0 });
+	return panels[panels.size() - 1].p;
 }
 
 void GUI::Remove_Panel(Panel& panel, unsigned int index_guide)
@@ -30,21 +32,22 @@ void GUI::Remove_Panel(Panel& panel, unsigned int index_guide)
 
 void GUI::Draw_Panels()
 {
-	const unsigned int num_panels = panels.size();
+	const int num_panels = panels.size();
 	int* layers = new int[num_panels];
 	for (int i = 0; i < num_panels; i++)
 	{
 		layers[i] = panels[i].layer;
 	}
 
-	quickSort(layers, 0, num_panels);
+	quickSort(layers, 0, num_panels-1);
 
 	for (int i = 0; i < num_panels; i++)
 	{
-		panels[i].p.Draw();
+		panels[i].p.Draw(window);
 	}
 
-	delete layers;
+	delete[] layers;
+	int x = 0;
 }
 
 void GUI::Remove_Panel(unsigned int index)
@@ -55,7 +58,7 @@ void GUI::Remove_Panel(unsigned int index)
 
 void GUI::Update_Panel_Order(char update_amount)
 {
-	const unsigned int num_panels = panels.size();
+	const int num_panels = panels.size();
 	for (int i = 0; i < num_panels; i++)
 	{
 		panels[i].layer += update_amount;

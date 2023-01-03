@@ -37,7 +37,7 @@
       <Filter>Source Files\Panel Elements</Filter>
     </ClCompile>
     <ClCompile Include="Shape_Element.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Panel Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,7 +54,7 @@
       <Filter>Header Files\Panel Elements</Filter>
     </ClInclude>
     <ClInclude Include="Shape_Element.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Panel Elements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

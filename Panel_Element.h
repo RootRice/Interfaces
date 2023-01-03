@@ -13,6 +13,6 @@ public:
 	virtual void Take_Input(sf::Vector2u& mouse_pos, sf::Event& button_presses) = 0;
 protected:
 	Element_Properties properties;
-	Panel_Element();
+	Panel_Element() {};
 };
 
