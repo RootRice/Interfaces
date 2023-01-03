@@ -12,11 +12,26 @@ void Panel::Draw(sf::RenderWindow& window)
 	sf::View ui_view(window_size * 0.5f, window_size);
 	sf::View current_view = window.getView();
 
+	constexpr unsigned int anchor_count = 9;
+	sf::Vector2f anchors[anchor_count]
+	{
+		sf::Vector2f(0, 0),
+		sf::Vector2f(window_size.x / 2, 0),
+		sf::Vector2f(window_size.x, 0),
+		sf::Vector2f(window_size.x, window_size.y / 2),
+		sf::Vector2f(window_size.x, window_size.y),
+		sf::Vector2f(window_size.x / 2, window_size.y),
+		sf::Vector2f(0, window_size.y),
+		sf::Vector2f(0, window_size.y / 2),
+		sf::Vector2f(window_size * 0.5f)
+	};
+	sf::Vector2f position = properties.position + anchors[properties.anchor];
+
 	window.setView(ui_view);
 	const unsigned int num_elements = elements.size();
 	for (int i = 0; i < num_elements; i++)
 	{
-		elements[i].Draw(window, properties.position);
+		elements[i].Draw(window, position);
 	}
 	
 
