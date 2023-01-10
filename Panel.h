@@ -13,22 +13,28 @@ public:
 	struct Panel_Properties
 	{
 		sf::Vector2f position;
+		sf::Vector2f size;
 		anchor_point anchor;
 	};
 
-	Panel(Panel_Properties& properties, unsigned int index_guide) : properties(properties), index_guide(index_guide) {};
-	Panel(Panel_Properties& properties, unsigned int index_guide, std::deque<Shape_Element> elements) : properties(properties), index_guide(index_guide), elements(elements) {};
-	Panel() { index_guide = 0; };
-	char Take_Input(sf::Vector2u mouse_pos, sf::Event& button_presses);
-	void Draw(sf::RenderWindow& window);
+	Panel(Panel_Properties& properties, sf::RenderWindow& window) : properties(properties), window(window) {};
+	Panel(Panel_Properties& properties, std::deque<Shape_Element> elements, sf::RenderWindow& window) : properties(properties), elements(elements), window(window) {};
+	char Take_Input(sf::Vector2f mouse_pos, sf::Event& button_presses);
+	void Draw();
 
 	void Add_Element(Shape_Element& element, bool back_or_front);
 	void Add_Element(Shape_Element& element);
+
+	bool Check_Within_Bounds(sf::Vector2f point);
 private:
 	Panel_Properties properties;
 
-	unsigned int index_guide;
+	sf::RenderWindow& window;
+
+	sf::Vector2f Get_Position_In_Window();
 
 	std::deque<Shape_Element> elements;
+
+	
 };
 
