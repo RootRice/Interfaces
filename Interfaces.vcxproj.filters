@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Panel Elements">
       <UniqueIdentifier>{212f8151-1be6-467e-9140-905dd7e18d86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{86034060-4b37-4230-b12e-67295bf4198f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{2fcae908-4cce-4d08-8240-7c5a1cd45c92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Interfaces.cpp">
@@ -39,6 +45,9 @@
     <ClCompile Include="Shape_Element.cpp">
       <Filter>Source Files\Panel Elements</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse_Hold_Tracker.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Panel.h">
@@ -55,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="Shape_Element.h">
       <Filter>Header Files\Panel Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse_Hold_Tracker.h">
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -18,12 +18,13 @@ int main()
     //
     panel_props.anchor = Panel::anchor_point::top_left;
     panel_props.position = sf::Vector2f(525, 425);
+    panel_props.moveable = true;
     panel_to_edit = &my_gui.Add_Panel(panel_props);
     element_props.size = sf::Vector2f(50, 50);
     element_props.origin = sf::Vector2f(0, 0);
     element_props.position = sf::Vector2f(0, 0);
     element = Shape_Element(sf::Color::Green, element_props);
-    panel_to_edit->Add_Element(element);
+    panel_to_edit->Add_Element(element, false);
     //
     panel_to_edit = NULL; delete panel_to_edit;
 

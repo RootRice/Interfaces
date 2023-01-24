@@ -36,7 +36,7 @@ void GUI::Draw_Panels()
 
 void GUI::Take_Input(sf::Event e, sf::Vector2f mouse_pos)
 {
-	if (e.type == sf::Event::MouseButtonReleased)
+	if (e.type == sf::Event::MouseButtonPressed)
 	{
 		std::list<Panel>::iterator it;
 		std::list<Panel>::iterator start = panels.begin();

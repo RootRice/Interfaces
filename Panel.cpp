@@ -1,8 +1,37 @@
 #include "Panel.h"
 
+Panel::Panel(Panel_Properties& properties, sf::RenderWindow& window) : properties(properties), window(window) 
+{
+	
+	if (properties.moveable)
+	{
+		const float move_bar_width = properties.size.x - (properties.size.x * 0.10f);
+		const float move_bar_height = 10.0f;
+		Panel_Element::Element_Properties element_properties{ sf::Vector2f(move_bar_width, move_bar_height), sf::Vector2f(0.0f, 0.0f),  sf::Vector2f(0.0f, 0.0f) };
+		Shape_Element shape(sf::Color::Blue, element_properties);
+		Add_Element(shape, true);
+		const int last_element = elements.size() - 1;
+		void (Panel::*function_pointer)(sf::Vector2u&) = &Panel::Begin_Move;
+		elements[last_element].Add_Functionality(Panel_Element::On_Click, function_pointer);
+		function_pointer = &Panel::Move;
+		elements[last_element].Add_Functionality(Panel_Element::On_Hold, function_pointer);
+		function_pointer = &Panel::End_Move;
+		elements[last_element].Add_Functionality(Panel_Element::On_Release, function_pointer);
+	}
+}
+
+
 char Panel::Take_Input(sf::Vector2f mouse_pos, sf::Event& button_presses)
 {
-
+	int num_elements = elements.size();
+	for (int i = 0; i < num_elements; i++)
+	{
+		if (elements[i].Check_Within_Bounds(properties.position, mouse_pos))
+		{
+			sf::Vector2u v2(mouse_pos.x, mouse_pos.y);
+			elements[i].Take_Input(v2, *this,button_presses);
+		}
+	}
 	return 0;
 }
 
@@ -28,7 +57,11 @@ void Panel::Draw()
 void Panel::Add_Element(Shape_Element& element, bool back_or_front)
 {
 	if (back_or_front)
-		elements.push_back(element); return;
+	{
+		elements.push_back(element);
+		return;
+	}
+		
 
 	elements.push_front(element);
 }
@@ -69,5 +102,22 @@ sf::Vector2f Panel::Get_Position_In_Window()
 	};
 	sf::Vector2f r = properties.position + anchors[properties.anchor];
 	return properties.position + anchors[properties.anchor];
+}
+
+void Panel::Begin_Move(sf::Vector2u& mouse_pos)
+{
+	sf::Vector2f offset = properties.position - sf::Vector2f(mouse_pos);
+	tracker = new Mouse_Hold_Tracker(mouse_pos, offset);
+}
+
+void Panel::Move(sf::Vector2u& mouse_pos)
+{
+	tracker->Update_Mouse_Position(mouse_pos);
+	properties.position = tracker->Get_Updated_Position();
+}
+
+void Panel::End_Move(sf::Vector2u& mouse_pos)
+{
+	tracker = NULL;
 }
 

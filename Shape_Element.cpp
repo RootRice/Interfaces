@@ -22,6 +22,3 @@ void Shape_Element::Draw(sf::RenderWindow& window, sf::Vector2f& panel_origin)
 	window.draw(shape);
 }
 
-void Shape_Element::Take_Input(sf::Vector2u& mouse_pos, sf::Event& button_presses)
-{
-}
