@@ -1,4 +1,5 @@
 #include "Panel.h"
+#include <algorithm>
 
 Panel::Panel(Panel_Properties& properties, sf::RenderWindow& window) : properties(properties), window(window) 
 {
@@ -11,12 +12,9 @@ Panel::Panel(Panel_Properties& properties, sf::RenderWindow& window) : propertie
 		Shape_Element shape(sf::Color::Blue, element_properties);
 		Add_Element(shape, true);
 		const int last_element = elements.size() - 1;
-		void (Panel::*function_pointer)(sf::Vector2u&) = &Panel::Begin_Move;
-		elements[last_element].Add_Functionality(Panel_Element::On_Click, function_pointer);
-		function_pointer = &Panel::Move;
-		elements[last_element].Add_Functionality(Panel_Element::On_Hold, function_pointer);
-		function_pointer = &Panel::End_Move;
-		elements[last_element].Add_Functionality(Panel_Element::On_Release, function_pointer);
+		elements[last_element].Add_Functionality(Panel_Element::On_Click, Panel_Element::Member_Function{ &Panel::Begin_Move });
+		elements[last_element].Add_Functionality(Panel_Element::On_Hold, Panel_Element::Member_Function{ &Panel::Move });
+		elements[last_element].Add_Functionality(Panel_Element::On_Release, Panel_Element::Member_Function{ &Panel::End_Move });
 	}
 }
 
@@ -26,11 +24,8 @@ char Panel::Take_Input(sf::Vector2f mouse_pos, sf::Event& button_presses)
 	int num_elements = elements.size();
 	for (int i = 0; i < num_elements; i++)
 	{
-		if (elements[i].Check_Within_Bounds(properties.position, mouse_pos))
-		{
-			sf::Vector2u v2(mouse_pos.x, mouse_pos.y);
-			elements[i].Take_Input(v2, *this,button_presses);
-		}
+		sf::Vector2i v2(mouse_pos.x, mouse_pos.y);
+		elements[i].Take_Input(v2, properties.position, *this, button_presses);
 	}
 	return 0;
 }
@@ -49,6 +44,7 @@ void Panel::Draw()
 	{
 		elements[i].Draw(window, position);
 	}
+	
 	
 
 	window.setView(current_view);
@@ -104,20 +100,24 @@ sf::Vector2f Panel::Get_Position_In_Window()
 	return properties.position + anchors[properties.anchor];
 }
 
-void Panel::Begin_Move(sf::Vector2u& mouse_pos)
+void Panel::Begin_Move(sf::Vector2i& mouse_pos)
 {
 	sf::Vector2f offset = properties.position - sf::Vector2f(mouse_pos);
 	tracker = new Mouse_Hold_Tracker(mouse_pos, offset);
 }
 
-void Panel::Move(sf::Vector2u& mouse_pos)
+void Panel::Move(sf::Vector2i& mouse_pos)
 {
 	tracker->Update_Mouse_Position(mouse_pos);
 	properties.position = tracker->Get_Updated_Position();
+	properties.position.x = std::max(properties.position.x, 10.0f);
+	properties.position.y = std::max(properties.position.y, 10.0f);
+	properties.position.x = std::min(properties.position.x, window.getSize().x - 10.0f);
+	properties.position.y = std::min(properties.position.y, window.getSize().y - 10.0f);
 }
 
-void Panel::End_Move(sf::Vector2u& mouse_pos)
+void Panel::End_Move(sf::Vector2i& mouse_pos)
 {
-	tracker = NULL;
+	delete tracker;
 }
 

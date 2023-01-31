@@ -18,9 +18,10 @@ int main()
     //
     panel_props.anchor = Panel::anchor_point::top_left;
     panel_props.position = sf::Vector2f(525, 425);
+    panel_props.size = sf::Vector2f(300, 100);
     panel_props.moveable = true;
     panel_to_edit = &my_gui.Add_Panel(panel_props);
-    element_props.size = sf::Vector2f(50, 50);
+    element_props.size = sf::Vector2f(300, 100);
     element_props.origin = sf::Vector2f(0, 0);
     element_props.position = sf::Vector2f(0, 0);
     element = Shape_Element(sf::Color::Green, element_props);
@@ -32,9 +33,11 @@ int main()
     {
         my_window.clear();
         sf::Event e;
+        const sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(my_window));
+        if (mouse_pos.x < -100.0f)
+            int j = 90;
         while (my_window.pollEvent(e))
         {
-            const sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(my_window));
             if (e.type == sf::Event::Closed)
                 my_window.close();
             my_gui.Take_Input(e, mouse_pos);

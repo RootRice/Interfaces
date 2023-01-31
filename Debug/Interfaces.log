@@ -1,24 +1,2 @@
-﻿  Panel.cpp
-F:\Leisure\GameProjects\Interfaces\Panel.cpp(31,42): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              T=unsigned int
-          ]
-F:\Leisure\GameProjects\Interfaces\Panel.cpp(31,29): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              T=unsigned int
-          ]
-F:\Leisure\GameProjects\Interfaces\Panel.cpp(48,20): warning C4018: '<': signed/unsigned mismatch
-  Panel_Element.cpp
-  Shape_Element.cpp
-  Generating Code...
+﻿  Interfaces.cpp
   Interfaces.vcxproj -> F:\Leisure\GameProjects\Interfaces\Debug\Interfaces.exe

@@ -1,46 +1,50 @@
 #include "Panel_Element.h"
 
-void Panel_Element::Add_Functionality(Functionality_Type type, void (Panel::* function_pointer)(sf::Vector2u&))
+void Panel_Element::Add_Functionality(Functionality_Type type, Member_Function m)
 {
 	switch (type)
 	{
 	case(On_Click):
-		on_click.push_back(function_pointer);
+		on_click.push_back(m);
 		break;
 	case(On_Hold):
-		on_hold.push_back(function_pointer);
+		on_hold.push_back(m);
 		break;
 	case(On_Release):
-		on_release.push_back(function_pointer);
+		on_release.push_back(m);
 		break;
 	default:
 		break;
 	}
 }
 
-void Panel_Element::Take_Input(sf::Vector2u& mouse_pos, Panel& p, sf::Event& button_presses)
+void Panel_Element::Take_Input(sf::Vector2i& mouse_pos, sf::Vector2f panel_pos, Panel& panel, sf::Event& button_presses)
 {
 	switch (button_presses.type)
 	{
 	case(sf::Event::MouseButtonPressed):
 	{
+		if (!Check_Within_Bounds(panel_pos, sf::Vector2f(mouse_pos)))
+			break;
 		button_held = true;
 		int num_functions = on_click.size();
-		for (int i = 0; i < num_functions; i++) (p.*on_click[i])(mouse_pos);
+		for (int i = 0; i < num_functions; i++) (panel.*on_click[i].pointer)(mouse_pos);
 		break;
 	}
 	case(sf::Event::MouseButtonReleased):
 	{
+		if (!button_held)
+			break;
 		button_held = false;
 		int num_functions = on_release.size();
-		for (int i = 0; i < num_functions; i++) (p.*on_release[i])(mouse_pos);
+		for (int i = 0; i < num_functions; i++) (panel.*on_release[i].pointer)(mouse_pos);
 		break;
 	}
 	}
 	if (button_held)
 	{
 		int num_functions = on_hold.size();
-		for (int i = 0; i < num_functions; i++) (p.*on_hold[i])(mouse_pos);
+		for (int i = 0; i < num_functions; i++) (panel.*on_hold[i].pointer)(mouse_pos);
 	}
 }
 

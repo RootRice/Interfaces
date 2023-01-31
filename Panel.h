@@ -33,9 +33,9 @@ public:
 
 	bool Check_Within_Bounds(sf::Vector2f point);
 
-	void Begin_Move(sf::Vector2u& mouse_pos);
-	void Move(sf::Vector2u& mouse_pos);
-	void End_Move(sf::Vector2u& mouse_pos);
+	void Begin_Move(sf::Vector2i& mouse_pos);
+	void Move(sf::Vector2i& mouse_pos);
+	void End_Move(sf::Vector2i& mouse_pos);
 private:
 	Panel_Properties properties;
 

@@ -1,6 +1,6 @@
 #include "Shape_Element.h"
 
-Shape_Element::Shape_Element(sf::Texture& texture, Element_Properties& properties)
+Shape_Element::Shape_Element(sf::Texture& texture, Element_Properties& properties) : Panel_Element()
 {
 	shape.setSize(properties.size);
 	shape.setOrigin(properties.origin);
@@ -8,7 +8,7 @@ Shape_Element::Shape_Element(sf::Texture& texture, Element_Properties& propertie
 	this->properties = properties;
 }
 
-Shape_Element::Shape_Element(sf::Color colour, Element_Properties& properties)
+Shape_Element::Shape_Element(sf::Color colour, Element_Properties& properties) : Panel_Element()
 {
 	shape.setSize(properties.size);
 	shape.setOrigin(properties.origin);
