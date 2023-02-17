@@ -1,2 +1,26 @@
-﻿  Interfaces.cpp
-  Interfaces.vcxproj -> F:\Leisure\GameProjects\Interfaces\Debug\Interfaces.exe
+﻿  GUI.cpp
+C:\University\QuestMode\QuestMode\Interfaces\GUI.cpp(50,83): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
+C:\University\QuestMode\QuestMode\Interfaces\GUI.cpp(60,20): warning C4018: '<': signed/unsigned mismatch
+  Interfaces.cpp
+  Panel.cpp
+C:\University\QuestMode\QuestMode\Interfaces\Panel.cpp(37,41): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\University\QuestMode\QuestMode\Interfaces\Panel.cpp(37,28): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\University\QuestMode\QuestMode\Interfaces\Panel.cpp(53,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Interfaces.vcxproj -> C:\University\QuestMode\QuestMode\Interfaces\Debug\Interfaces.exe

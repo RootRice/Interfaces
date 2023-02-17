@@ -20,6 +20,7 @@ int main()
     panel_props.position = sf::Vector2f(525, 425);
     panel_props.size = sf::Vector2f(300, 100);
     panel_props.moveable = true;
+    panel_props.closeable = true;
     panel_to_edit = &my_gui.Add_Panel(panel_props);
     element_props.size = sf::Vector2f(300, 100);
     element_props.origin = sf::Vector2f(0, 0);
@@ -34,8 +35,7 @@ int main()
         my_window.clear();
         sf::Event e;
         const sf::Vector2f mouse_pos = sf::Vector2f(sf::Mouse::getPosition(my_window));
-        if (mouse_pos.x < -100.0f)
-            int j = 90;
+
         while (my_window.pollEvent(e))
         {
             if (e.type == sf::Event::Closed)

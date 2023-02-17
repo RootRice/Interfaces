@@ -55,7 +55,7 @@ bool Panel_Element::Check_Within_Bounds(sf::Vector2f& panel_origin, sf::Vector2f
 	const sf::Vector2f bottom_right = adjusted_position + properties.size;
 	bool tl = false;
 	bool br = false;
-	tl = (point.x > top_left.x) & (point.y > top_left.y);
-	br = (point.x < bottom_right.x) & (point.y < bottom_right.y);
+	tl = (point.x >= top_left.x) & (point.y >= top_left.y);
+	br = (point.x <= bottom_right.x) & (point.y <= bottom_right.y);
 	return tl & br;
 }

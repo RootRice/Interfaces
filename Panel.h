@@ -23,7 +23,7 @@ public:
 	Panel(Panel_Properties& properties, sf::RenderWindow& window);
 	Panel(Panel_Properties& properties, std::deque<Shape_Element> elements, sf::RenderWindow& window) : properties(properties), elements(elements), window(window) {};
 
-	~Panel() { delete tracker; };
+	~Panel() { tracker = NULL; delete tracker; };
 
 	char Take_Input(sf::Vector2f mouse_pos, sf::Event& button_presses);
 	void Draw();
@@ -36,6 +36,7 @@ public:
 	void Begin_Move(sf::Vector2i& mouse_pos);
 	void Move(sf::Vector2i& mouse_pos);
 	void End_Move(sf::Vector2i& mouse_pos);
+	void Close(sf::Vector2i& mouse_pos);
 private:
 	Panel_Properties properties;
 
@@ -46,6 +47,7 @@ private:
 
 	std::deque<Shape_Element> elements;
 
+	bool should_close = false;
 	
 };
 

@@ -1,2 +1,3 @@
 F:\Leisure\GameProjects\Interfaces\Debug\Interfaces.exe
 F:\Leisure\GameProjects\Interfaces\Debug\Interfaces.pdb
+C:\University\QuestMode\QuestMode\Interfaces\Debug\Interfaces.exe

@@ -42,9 +42,13 @@ void GUI::Take_Input(sf::Event e, sf::Vector2f mouse_pos)
 		for (it = start; it != end; ++it)
 		{
 			
-				it->Take_Input(mouse_pos, e);
-				if(e.type == sf::Event::MouseButtonPressed & it->Check_Within_Bounds(mouse_pos))
-					panels.splice(start, panels, it);
+			if (it->Take_Input(mouse_pos, e))
+			{
+				it = panels.erase(it);
+				continue;
+			}
+			if(e.type == sf::Event::MouseButtonPressed & it->Check_Within_Bounds(mouse_pos))
+				panels.splice(start, panels, it);
 			
 		}
 }

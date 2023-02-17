@@ -8,13 +8,23 @@ Panel::Panel(Panel_Properties& properties, sf::RenderWindow& window) : propertie
 	{
 		const float move_bar_width = properties.size.x - (properties.size.x * 0.10f);
 		const float move_bar_height = 10.0f;
-		Panel_Element::Element_Properties element_properties{ sf::Vector2f(move_bar_width, move_bar_height), sf::Vector2f(0.0f, 0.0f),  sf::Vector2f(0.0f, 0.0f) };
-		Shape_Element shape(sf::Color::Blue, element_properties);
+		Panel_Element::Element_Properties move_bar_properties{ sf::Vector2f(move_bar_width, move_bar_height), sf::Vector2f(0.0f, 0.0f),  sf::Vector2f(0.0f, 0.0f) };
+		Shape_Element shape(sf::Color::Blue, move_bar_properties);
 		Add_Element(shape, true);
 		const int last_element = elements.size() - 1;
 		elements[last_element].Add_Functionality(Panel_Element::On_Click, Panel_Element::Member_Function{ &Panel::Begin_Move });
 		elements[last_element].Add_Functionality(Panel_Element::On_Hold, Panel_Element::Member_Function{ &Panel::Move });
 		elements[last_element].Add_Functionality(Panel_Element::On_Release, Panel_Element::Member_Function{ &Panel::End_Move });
+	}
+	if (properties.closeable)
+	{
+		const float close_box_width = properties.size.x * 0.10f;
+		const float close_box_height = 10.0f;
+		Panel_Element::Element_Properties close_box_properties{ sf::Vector2f(close_box_width, close_box_height), sf::Vector2f(0.0f, 0.0f),  sf::Vector2f(properties.size.x - close_box_width, 0.0f) };
+		Shape_Element shape(sf::Color::Red, close_box_properties);
+		Add_Element(shape, true);
+		const int last_element = elements.size() - 1;
+		elements[last_element].Add_Functionality(Panel_Element::On_Release, Panel_Element::Member_Function{ &Panel::Close });
 	}
 }
 
@@ -27,7 +37,7 @@ char Panel::Take_Input(sf::Vector2f mouse_pos, sf::Event& button_presses)
 		sf::Vector2i v2(mouse_pos.x, mouse_pos.y);
 		elements[i].Take_Input(v2, properties.position, *this, button_presses);
 	}
-	return 0;
+	return should_close;
 }
 
 void Panel::Draw()
@@ -119,5 +129,10 @@ void Panel::Move(sf::Vector2i& mouse_pos)
 void Panel::End_Move(sf::Vector2i& mouse_pos)
 {
 	delete tracker;
+}
+
+void Panel::Close(sf::Vector2i& mouse_pos)
+{
+	should_close = true;
 }
 
